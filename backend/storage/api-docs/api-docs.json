@@ -1,0 +1,643 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Internship Management API",
+        "description": "API for managing student internships and reports",
+        "contact": {
+            "name": "API Support",
+            "email": "admin@example.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "Local server"
+        },
+        {
+            "url": "https://yourdomain.com/api",
+            "description": "Production server"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "User login",
+                "description": "Authenticate user and return token",
+                "operationId": "2dd578ff7aba2721293dac66833b27d1",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoginResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "User logout",
+                "description": "Revoke current user's tokens",
+                "operationId": "68a6108af04af5e3bc1ea68a6c6f1299",
+                "responses": {
+                    "200": {
+                        "description": "Successfully logged out",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Logged out successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/check-token": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Check token validity",
+                "description": "Verify token and return user data",
+                "operationId": "ff28c254629f841403194cc021a37182",
+                "responses": {
+                    "200": {
+                        "description": "Token is valid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/grades/set": {
+            "post": {
+                "tags": [
+                    "Teacher"
+                ],
+                "summary": "Set grade for report",
+                "description": "Set or update grade for student report",
+                "operationId": "b697783e398c6ea0c0d19942be33f4a6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SetGradeRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Grade set successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GradeResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/reports/upload": {
+            "post": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "Upload student report",
+                "description": "Upload or update internship report file",
+                "operationId": "6bdf91ad031ea32cbf9e467b05a1146f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "internship_id",
+                                    "file"
+                                ],
+                                "properties": {
+                                    "internship_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Report updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Отчет успешно обновлен"
+                                        },
+                                        "report": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 12
+                                                },
+                                                "student_id": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                },
+                                                "internship_id": {
+                                                    "type": "integer",
+                                                    "example": 13
+                                                },
+                                                "file_name": {
+                                                    "type": "string",
+                                                    "example": "report.pdf"
+                                                },
+                                                "file_path": {
+                                                    "type": "string",
+                                                    "example": "https://localhost/storage/report.pdf"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Report created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Отчет успешно загружен"
+                                        },
+                                        "report": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 63
+                                                },
+                                                "student_id": {
+                                                    "type": "integer",
+                                                    "example": 4
+                                                },
+                                                "internship_id": {
+                                                    "type": "integer",
+                                                    "example": 2
+                                                },
+                                                "file_name": {
+                                                    "type": "string",
+                                                    "example": "report.pdf"
+                                                },
+                                                "file_path": {
+                                                    "type": "string",
+                                                    "example": "https://localhost/storage/report.pdf"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/student/reports": {
+            "get": {
+                "tags": [
+                    "Student"
+                ],
+                "summary": "Get student's reports",
+                "description": "Retrieve all reports for the authenticated student",
+                "operationId": "88f6179b9d6151dc1239d006f6de9929",
+                "responses": {
+                    "200": {
+                        "description": "Reports retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/StudentReport"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden - user is not a student",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/teacher/students-reports": {
+            "get": {
+                "tags": [
+                    "Teacher"
+                ],
+                "summary": "Get students reports for teacher",
+                "description": "Retrieve all student reports for the authenticated teacher with filtering options",
+                "operationId": "e4118406e7ae05aaca4f5ba97201f50d",
+                "parameters": [
+                    {
+                        "name": "course",
+                        "in": "query",
+                        "description": "Filter by course number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "group_id",
+                        "in": "query",
+                        "description": "Filter by group ID",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Reports retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "reports": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/TeacherReport"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden - user is not a teacher",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "LoginRequest": {
+                "required": [
+                    "login",
+                    "password"
+                ],
+                "properties": {
+                    "login": {
+                        "type": "string",
+                        "example": "teacher@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "password123"
+                    }
+                },
+                "type": "object"
+            },
+            "LoginResponse": {
+                "properties": {
+                    "token": {
+                        "type": "string",
+                        "example": "1|abc123..."
+                    },
+                    "user": {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "login": {
+                                "type": "string",
+                                "example": "teacher@example.com"
+                            },
+                            "role": {
+                                "type": "string",
+                                "example": "teacher"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "UserResponse": {
+                "properties": {
+                    "user": {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "login": {
+                                "type": "string",
+                                "example": "teacher@example.com"
+                            },
+                            "role": {
+                                "type": "string",
+                                "example": "teacher"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "SetGradeRequest": {
+                "required": [
+                    "report_id",
+                    "grade"
+                ],
+                "properties": {
+                    "report_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "grade_type_id": {
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "comment": {
+                        "type": "string",
+                        "example": "Отличная работа!"
+                    }
+                },
+                "type": "object"
+            },
+            "GradeResponse": {
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Оценка успешно выставлена"
+                    },
+                    "grade": {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "report_id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "grade": {
+                                "type": "string",
+                                "example": "Зачет"
+                            },
+                            "comment": {
+                                "type": "string",
+                                "example": "Отличная работа!"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "StudentReport": {
+                "properties": {
+                    "internship_title": {
+                        "type": "string",
+                        "example": "Летняя практика"
+                    },
+                    "teacher": {
+                        "type": "string",
+                        "example": "Иванов Иван Иванович"
+                    },
+                    "file_url": {
+                        "type": "string",
+                        "example": "http://example.com/storage/reports/file.pdf",
+                        "nullable": true
+                    },
+                    "file_name": {
+                        "type": "string",
+                        "example": "report.pdf"
+                    },
+                    "grade": {
+                        "type": "integer",
+                        "example": 5,
+                        "nullable": true
+                    },
+                    "comment": {
+                        "type": "string",
+                        "example": "Хорошая работа",
+                        "nullable": true
+                    },
+                    "submitted_date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-15 10:30:00"
+                    },
+                    "deadline": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-06-30"
+                    },
+                    "start_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-06-01"
+                    }
+                },
+                "type": "object"
+            },
+            "TeacherReport": {
+                "properties": {
+                    "report_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "student_fio": {
+                        "type": "string",
+                        "example": "Иванов Иван Иванович"
+                    },
+                    "group": {
+                        "type": "string",
+                        "example": "ПИ-201"
+                    },
+                    "file_url": {
+                        "type": "string",
+                        "example": "https://localhost/storage/rewtf.pdf",
+                        "nullable": true
+                    },
+                    "file_name": {
+                        "type": "string",
+                        "example": "report.pdf"
+                    },
+                    "grade": {
+                        "type": "string",
+                        "example": "4",
+                        "nullable": true
+                    },
+                    "comment": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "submitted_date": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "deadline": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "internship_title": {
+                        "type": "string",
+                        "example": "Летняя практика"
+                    }
+                },
+                "type": "object"
+            },
+            "ErrorResponse": {
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": "Доступно только для студентов"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "The provided credentials are incorrect."
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Authentication",
+            "description": "Аутентификация и управление токенами"
+        },
+        {
+            "name": "Teacher",
+            "description": "Функционал преподавателя"
+        },
+        {
+            "name": "Student",
+            "description": "Функционал студента"
+        },
+        {
+            "name": "Reports",
+            "description": "Управление отчетами"
+        }
+    ]
+}

@@ -8,8 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasFactory;
-    use HasApiTokens;
+    use HasFactory, HasApiTokens;
 
     protected $fillable = [
         'login',
@@ -30,16 +29,6 @@ class User extends Authenticatable
         return $this->hasOne(Teacher::class);
     }
 
-    public function profile()
-    {
-        if ($this->type === 'student' && $this->student) {
-            return $this->student;
-        } elseif ($this->type === 'teacher' && $this->teacher) {
-            return $this->teacher;
-        }
-        return null;
-    }
-
     public function isStudent()
     {
         return $this->student !== null;
@@ -52,7 +41,7 @@ class User extends Authenticatable
 
     public function getRoleAttribute(): string
     {
-        if ($this->isStudent()) return 'student';
-        return 'teacher';
+        if ($this->isTeacher()) return 'teacher';
+        return 'student';
     }
 }

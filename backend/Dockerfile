@@ -10,8 +10,9 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     libpq-dev \
-    postgresql-client \
-    && docker-php-ext-install pdo_pgsql pgsql mbstring exif pcntl bcmath gd zip
+    postgresql-client
+
+RUN docker-php-ext-install pdo_pgsql pgsql mbstring exif pcntl bcmath gd zip
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -24,6 +25,14 @@ RUN if [ ! -f .env ]; then \
     php artisan key:generate; \
     fi
 
+# Создаем структуру директорий storage
+RUN mkdir -p storage/app/public \
+    storage/framework/cache \
+    storage/framework/sessions \
+    storage/framework/views \
+    storage/logs
+
+# Устанавливаем правильные права
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 

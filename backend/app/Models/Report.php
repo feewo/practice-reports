@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Storage;
 
 class Report extends Model
 {
@@ -21,6 +22,11 @@ class Report extends Model
     public function internship()
     {
         return $this->belongsTo(Internship::class);
+    }
+    
+    public function grade()
+    {
+        return $this->hasOne(Grade::class);
     }
 
     public function getFileUrlAttribute()

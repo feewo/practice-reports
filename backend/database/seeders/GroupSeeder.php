@@ -9,6 +9,13 @@ class GroupSeeder extends Seeder
 {
     public function run(): void
     {
-        Group::factory()->count(5)->create();
+        $groups = [
+            ['name' => 'ИТ-1', 'course' => 1, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'ИТ-2', 'course' => 2,'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'ПИ-1', 'course' => 1,'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'ПИ-2', 'course' => 2,'created_at' => now(), 'updated_at' => now()],
+        ];
+
+        Group::insert($groups);
     }
 }
