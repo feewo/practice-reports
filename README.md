@@ -1,6 +1,13 @@
-# Запуск (пока только бэка) 🚀
+# Запуск 🚀
+Бэк:
 ```bash
 docker-compose -f docker-compose.backend.yml up --build
+```
+Фронт: 
+```bash
+cd frontend
+npm i
+npm run start
 ```
 
 # Маленькие фишки
