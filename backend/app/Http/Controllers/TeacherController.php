@@ -53,11 +53,6 @@ class TeacherController extends Controller
     {
         $user = Auth::user();
         
-        if (!$user->isTeacher()) {
-            return response()->json([
-                'error' => 'Доступ разрешен только для учителей'
-            ], 403);
-        }
 
         $teacher = $user->teacher;
 
@@ -96,7 +91,7 @@ class TeacherController extends Controller
                                     $report->student->name . ' ' . 
                                     $report->student->patronymic),
                 'group' => $report->student->group->name,
-                'file_url' => $report->file_exists ? $report->file_url : null,
+                'file_url' => $report->file_url,
                 'file_name' => $report->file_name,
                 'grade' => $report->grade?->grade_type?->type,
                 'grade_comment' => $report->grade?->comment,

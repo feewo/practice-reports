@@ -16,7 +16,7 @@ class ReportController extends Controller
      *     path="/reports/upload",
      *     summary="Upload student report",
      *     description="Upload or update internship report file",
-     *     tags={"Reports"},
+     *     tags={"Student"},
      *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,

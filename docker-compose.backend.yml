@@ -8,7 +8,7 @@ services:
     container_name: laravel_backend
     volumes:
       - ./backend:/var/www
-      - storage_volume:/var/www/storage/app/public  # Добавляем volume для storage
+      - storage_volume:/var/www/storage/app/public
     depends_on:
       postgres:
         condition: service_healthy
