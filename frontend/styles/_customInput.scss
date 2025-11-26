@@ -1,0 +1,21 @@
+.custom-input {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid $GRAY-LIGHT;
+    border-radius: 10px;
+    background: $WHITE;
+    transition: background .3s ease-in-out, border .3s ease-in-out, color .3s ease-in-out;
+
+    &:focus {
+        outline: none;
+        border: 1px solid $BLUE;
+        background: rgba($BLUE, 0.1);
+        color: $BLUE;
+    }
+
+    &_error {
+        border: 1px solid $RED;
+        background: rgba($RED, 0.1);
+        color: $RED;
+    }
+}

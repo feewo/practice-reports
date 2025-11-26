@@ -1,0 +1,61 @@
+.intro {
+    display: flex;
+    flex-direction: column;
+    background: $BLUE;
+    flex-grow: 1;
+
+    &__content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 50px 0;
+        @include wrapper();
+    }
+
+    &__block {
+        width: 450px;
+        padding: 40px 35px;
+        background: $WHITE;
+        border-radius: 15px;
+        text-align: center;
+    }
+
+    &__title {
+        font-size: 32px;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: $BLUE;
+        margin: 0 0 5px;
+    }
+
+    &__subtitle {
+        font-size: 15px;
+        font-weight: 400;
+        color: $GRAY;
+        margin: 0 0 10px;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        grid-gap: 18px;
+        text-align: left;
+    }
+
+    &__label {
+        display: block;;
+        font-size: 14px;
+        font-weight: 700;
+        color: $TEXT;
+        margin: 0 0 5px;
+    }
+
+    &__footer {
+        font-size: 12px;
+        font-weight: 400;
+        color: $GRAY-LIGHT;
+        margin: 42px 0 0;
+    }
+}
