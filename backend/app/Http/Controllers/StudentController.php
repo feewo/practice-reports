@@ -56,7 +56,7 @@ class StudentController extends Controller
             return [
                 'internship_title' => $report->internship->title,
                 'teacher' => $teacherFullName,
-                'file_url' => $report->file_exists ? $report->file_url : null,
+                'file_url' => $report->file_url,
                 'file_name' => $report->file_name,
                 'grade' => $report->grade?->grade_type?->type,
                 'comment' => $report->grade?->comment,

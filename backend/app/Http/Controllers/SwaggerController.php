@@ -4,7 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 /**
+ * @OA\Tag(
+ *     name="Authentication",
+ *     description="Аутентификация и управление токенами"
+ * )
+ * @OA\Tag(
+ *     name="Teacher",
+ *     description="Функционал преподавателя"
+ * )
+ * @OA\Tag(
+ *     name="Student", 
+ *     description="Функционал студента"
+ * )
+ * @OA\Tag(
+ *     name="Reports",
+ *     description="Управление отчетами"
+ * )
  * @OA\Info(
  *     title="Internship Management API",
  *     description="API for managing student internships and reports",

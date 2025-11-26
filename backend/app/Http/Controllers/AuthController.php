@@ -8,24 +8,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
-/**
- * @OA\Tag(
- *     name="Authentication",
- *     description="Аутентификация и управление токенами"
- * )
- * @OA\Tag(
- *     name="Teacher",
- *     description="Функционал преподавателя"
- * )
- * @OA\Tag(
- *     name="Student", 
- *     description="Функционал студента"
- * )
- * @OA\Tag(
- *     name="Reports",
- *     description="Управление отчетами"
- * )
- */
 class AuthController extends Controller
 {
     /**

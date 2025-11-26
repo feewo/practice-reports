@@ -162,7 +162,7 @@
         "/reports/upload": {
             "post": {
                 "tags": [
-                    "Reports"
+                    "Student"
                 ],
                 "summary": "Upload student report",
                 "description": "Upload or update internship report file",
@@ -634,10 +634,6 @@
         {
             "name": "Student",
             "description": "Функционал студента"
-        },
-        {
-            "name": "Reports",
-            "description": "Управление отчетами"
         }
     ]
 }
