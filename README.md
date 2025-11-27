@@ -9,7 +9,7 @@ cd frontend
 npm i
 npm run start
 ```
-Создать .env файл в frontend/src и указать ```REACT_APP_API_URL="http://localhost:8000"```
+Создать .env файл в /frontend и указать ```REACT_APP_API_URL="http://localhost:8000"```
 
 # Маленькие фишки
 - Студент логин: student, пароль: 123
