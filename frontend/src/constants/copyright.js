@@ -41,15 +41,17 @@ export const tacherContent = {
             title: "Группа",
             activeOption: "Все",
             options: [
+                {id: 0, value: "Все"},
                 {id: 1, value: "ИС-31"},
-                {id: 1, value: "ИС-32"},
-                {id: 1, value: "ИС-21"},
+                {id: 2, value: "ИС-32"},
+                {id: 3, value: "ИС-21"},
             ]
         },
         {
             title: "Курс",
             activeOption: "Все",
             options: [
+                {id: 0, value: "Все"},
                 {id: 1, value: "2"},
                 {id: 1, value: "3"},
             ]
@@ -58,6 +60,7 @@ export const tacherContent = {
             title: "Статус",
             activeOption: "Все",
             options: [
+                {id: 0, value: "Все"},
                 {id: 1, value: STATUSES.valued.text},
                 {id: 2, value: STATUSES.invalued.text},
                 {id: 3, value: STATUSES.modify.text},
@@ -65,52 +68,54 @@ export const tacherContent = {
             ]
         },
     ],
-    tableHead: [
-        {title: "ФИО"},
-        {title: "Группа"},
-        {title: "Файл"},
-        {title: "Статус"},
-        {title: "Оценка"},
-        {title: "Дата (сдача / дедлайн)"},
-    ],
-    list: [ // Временно
-        {
-            id: 1,
-            name: "Иванов И.И.",
-            group: "ИС-31",
-            file: "test.pdf",
-            statusId: 3,
-            assessment: null,
-            date: "12.06.2025 / 20.06.2025",
-        },
-        {
-            id: 2,
-            name: "Петров А.А.",
-            group: "ИС-31",
-            file: "test.pdf",
-            statusId: 1,
-            assessment: "зачтено",
-            date: "10.06.2025 / 20.06.2025",
-        },
-        {
-            id: 3,
-            name: "Сидоров С.С.",
-            group: "ИС-32",
-            file: "test.pdf",
-            statusId: 2,
-            assessment: null,
-            date: "11.06.2025 / 20.06.2025",
-        },
-        {
-            id: 4,
-            name: "Кузнецов Д.Д.",
-            group: "ИС-21",
-            file: null,
-            statusId: 4,
-            assessment: null,
-            date: "— / 20.06.2025",
-        }
-    ]
+    table: {
+        head: [
+            {title: "ФИО"},
+            {title: "Группа"},
+            {title: "Файл"},
+            {title: "Статус"},
+            {title: "Оценка"},
+            {title: "Дата (сдача / дедлайн)"},
+        ],
+        body: [ // Временно
+            {
+                id: 1,
+                name: "Иванов И.И.",
+                group: "ИС-31",
+                file: "test.pdf",
+                statusId: 3,
+                assessment: null,
+                date: "12.06.2025 / 20.06.2025",
+            },
+            {
+                id: 2,
+                name: "Петров А.А.",
+                group: "ИС-31",
+                file: "test.pdf",
+                statusId: 1,
+                assessment: "зачтено",
+                date: "10.06.2025 / 20.06.2025",
+            },
+            {
+                id: 3,
+                name: "Сидоров С.С.",
+                group: "ИС-32",
+                file: "test.pdf",
+                statusId: 2,
+                assessment: null,
+                date: "11.06.2025 / 20.06.2025",
+            },
+            {
+                id: 4,
+                name: "Кузнецов Д.Д.",
+                group: "ИС-21",
+                file: null,
+                statusId: 4,
+                assessment: null,
+                date: "— / 20.06.2025",
+            }
+        ]
+    }
 }
 
 export const studentContent = {
