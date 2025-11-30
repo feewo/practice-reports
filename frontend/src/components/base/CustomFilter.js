@@ -8,6 +8,7 @@ export default function CustomFilter({filter}) {
     const listRef = useRef(null);
     console.log(isVisibleList);
     const onOptionSelect = (option) => {
+        filter.onChange?.(option);
         setActiveOption(option);
         setIsVisibleList(false);
     }

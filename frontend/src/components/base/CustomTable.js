@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { STATUSES } from "../../constants/copyright";
 import CustomButton from "./CustomButton";
 
-export default function CustomTable({head, body, title, className}) {
+export default function CustomTable({head, body, title, className, onDownload}) {
     const getTextByStatusId = (statusId) => {
         return STATUSES[Object.keys(STATUSES).find(key => STATUSES[key].id === statusId)].text
     }
@@ -11,12 +11,12 @@ export default function CustomTable({head, body, title, className}) {
         return STATUSES[Object.keys(STATUSES).find(key => STATUSES[key].id === statusId)].color
     }
 
-    const getContentByCell = (key, value) => {
+    const getContentByCell = (key, value, row) => {
         if (key === "statusId") {
             return getTextByStatusId(value)
         } 
         if (key === "file") {
-            return <CustomButton className={"custom-table__download"} text={"Скачать"} />
+            return <CustomButton onClick={() => onDownload?.(value, row.name)} className={"custom-table__download"} text={"Скачать"} />
         }
 
         return value
@@ -40,7 +40,7 @@ export default function CustomTable({head, body, title, className}) {
                             <td key={key} className={classNames(`custom-table__body-${key}`, {
                                 [`custom-table__body-cell_${key === "statusId" && getColorByStatusId(value)}`]: key === "statusId"
                             })}>
-                                {value ? getContentByCell(key, value) : "—"}
+                                {value ? getContentByCell(key, value, row) : "—"}
                             </td> : null
                         )}
                     </tr>

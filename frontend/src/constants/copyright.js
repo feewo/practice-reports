@@ -38,25 +38,29 @@ export const introContent = {
 export const tacherContent = {
     filters: [
         {
+            id: "group_id",
             title: "Группа",
             activeOption: "Все",
             options: [
                 {id: 0, value: "Все"},
-                {id: 1, value: "ИС-31"},
-                {id: 2, value: "ИС-32"},
-                {id: 3, value: "ИС-21"},
+                {id: 1, value: "ИТ-1"},
+                {id: 2, value: "ИТ-2"},
+                {id: 3, value: "ПИ-1"},
+                {id: 4, value: "ПИ-2"},
             ]
         },
         {
+            id: "course", 
             title: "Курс",
             activeOption: "Все",
             options: [
                 {id: 0, value: "Все"},
-                {id: 1, value: "2"},
-                {id: 1, value: "3"},
+                {id: 1, value: "1"},
+                {id: 2, value: "2"},
             ]
         },
         {
+            id: "status",
             title: "Статус",
             activeOption: "Все",
             options: [
