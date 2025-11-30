@@ -1,0 +1,32 @@
+.custom-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: $BLUE;
+    color: $WHITE;
+    padding: 14px 74px;
+
+    &__logo {
+        font-size: 20px;
+        text-transform: uppercase;
+    }
+
+    &__profile {
+        display: flex;
+        align-items: center;
+        grid-gap: 15px;
+    }
+
+    &__profile-name {
+        flex-shrink: 0;
+        border-radius: 8px;
+        padding: 8px 26px 8px 12px;
+        font-size: 14px;
+        background: rgba($WHITE, .08);
+    }
+
+    &__exit {
+        padding: 5px 10px;
+    }
+}

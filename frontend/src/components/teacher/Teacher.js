@@ -1,7 +1,7 @@
 import { useAuth } from "../../context/AuthContext";
 import CustomButton from "../base/CustomButton";
 
-export default function Teacher() {
+export default function Teacher({}) {
 	const { logout } = useAuth();
 
 	const LogoutHandler = () => {

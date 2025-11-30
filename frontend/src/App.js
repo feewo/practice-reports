@@ -5,9 +5,13 @@ import { components } from "./constants/components";
 import { apiFetch } from "./api";
 import { getToken } from "./utils/auth";
 import { AuthProvider } from "./context/AuthContext";
+import CustomHeader from "./components/base/CustomHeader";
+import { headerContent } from "./constants/copyright";
 
 function App() {
 	const [page, setPage] = useState("checking");
+
+	const pagesWithHeader = ["teacher", "student"];
 
 	useEffect(() => {
 		const checkAuthAndSetPage = async () => {
@@ -46,6 +50,7 @@ function App() {
 		<AuthProvider>
 			<div className="App">
 				<div className="page">
+					{pagesWithHeader.includes(page) && <CustomHeader {...headerContent} />}
 					{components[page] ? components[page]({ setPage }) : null}
 				</div>
 			</div>

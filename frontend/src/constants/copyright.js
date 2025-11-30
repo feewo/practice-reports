@@ -1,3 +1,10 @@
+import Exit from "../components/icons/Exit"
+
+export const headerContent = {
+    logo: "ЯГТУ",
+    name: "Петров П.П.", // Временно
+}
+
 export const introContent = {
     title: "ЯГТУ",
     subtitle: "Вход в систему",

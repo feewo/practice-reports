@@ -14,4 +14,10 @@
     &:hover {
         background: darken($BLUE, 7);
     }
+
+    &__icon {
+        width: 20px;
+        height: 20px;
+        fill: $WHITE
+    }
 }

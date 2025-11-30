@@ -3,7 +3,7 @@ import CustomButton from "../base/CustomButton";
 import CustomInput from "../base/CustomInput";
 
 export default function IntroForm({ inputs, button, onSubmit, error }) {
-	const isError = error; //TO-DO: тут флаг ошибки
+	const isError = error;
 
 	const initialValues = {};
 	inputs.forEach(input => {
