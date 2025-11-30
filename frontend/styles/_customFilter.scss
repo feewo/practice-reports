@@ -1,0 +1,75 @@
+.custom-filter {
+    position: relative;
+    color: $TEXT;
+    min-width: 140px;
+
+    &:hover {
+        .custom-filter__value {
+            background: rgba($BLUE, .1);
+            border: 2px solid $BLUE;
+            color: $BLUE;
+        }
+    }
+
+    &__name {
+        font-size: 13px;
+        color: $GRAY-FILTER;
+        margin: 0 0 5px;
+    }
+
+    &__value {
+        background: $WHITE;
+        border: 2px solid rgba($GRAY, .3);
+        padding: 9px 27px 9px 15px;
+        color: $TEXT;
+        font-weight: 400;
+        justify-content: start;
+    }
+
+    &__list {
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        transform: translateY(100%);
+        width: 100%;
+        background: $WHITE;
+        border: 2px solid rgba($GRAY, .3);
+        border-radius: 8px;
+        padding: 5px 0;
+        overflow: hidden;
+        
+        &-enter {
+            max-height: 0;
+            opacity: 0;
+        }
+        &-enter-active {
+            max-height: 500px;
+            opacity: 1;
+            transition: opacity .3s ease-in-out, max-height .5s ease-in-out;
+        }
+        &-exit {
+            max-height: 500px;
+            opacity: 1;
+        }
+        &-exit-active {
+            max-height: 0;
+            opacity: 0;
+            transition: opacity .3s ease-in-out, max-height .5s ease-in-out;
+        }
+    }
+
+    &__option-btn {
+        background: $WHITE;
+        color: $TEXT;
+        justify-content: start;
+        font-weight: 400;
+        padding: 8px 12px;
+        height: auto;
+        border-radius: 0;
+
+        &:hover {
+            background: rgba($BLUE, .1);
+            color: $BLUE;
+        }
+    }
+}

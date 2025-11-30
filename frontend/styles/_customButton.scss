@@ -9,7 +9,7 @@
     color: $WHITE;
     font-size: 15px;
     font-weight: 700;
-    transition: background .3s ease-in-out;
+    transition: all .3s ease-in-out;
 
     &:hover {
         background: darken($BLUE, 7);

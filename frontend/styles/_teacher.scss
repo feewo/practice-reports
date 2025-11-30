@@ -1,0 +1,16 @@
+.teacher {
+    padding: 40px 0;
+
+    &__block {
+        display: flex;
+        flex-direction: column;
+        grid-gap: 20px;
+        @include wrapper();
+    }
+
+    &__filters {
+        display: flex;
+        align-items: center;
+        grid-gap: 12px;
+    }
+}

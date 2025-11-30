@@ -1,6 +1,8 @@
+import classNames from "classnames"
+
 export default function CustomButton({ text, onClick, Icon, img, className }) {
 	return (
-		<button className={`custom-button ${className}`} onClick={onClick}>
+		<button className={classNames("custom-button", className)} onClick={onClick}>
 			{text}
 			{img && 
 				<img 
