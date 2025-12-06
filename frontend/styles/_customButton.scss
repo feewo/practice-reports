@@ -11,6 +11,13 @@
     font-weight: 700;
     transition: all .3s ease-in-out;
 
+    &_download {
+        height: 35px;
+        width: 101px;
+        font-size: 13px;
+        justify-self: end;
+    }
+
     &:hover {
         background: darken($BLUE, 7);
     }

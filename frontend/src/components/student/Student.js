@@ -1,19 +1,13 @@
-import { useAuth } from "../../context/AuthContext";
-import CustomButton from "../base/CustomButton";
+import CustomTable from "../base/CustomTable";
+import CustomFileInput from "../base/CustomFileInput";
 
-export default function Student() {
-	const { logout } = useAuth();
-
-	const LogoutHandler = () => {
-		logout();
-		window.location.reload(); // Временное решение
-	};
-
-	// Демонстрация работы
+export default function Student({table, file}) {
 	return (
-		<>
-			<h1>Студент</h1>
-			<CustomButton text={"Выйти"} onClick={LogoutHandler}></CustomButton>
-		</>
+		<section className="student">
+			<div className="student__block">
+				<CustomFileInput className={"custom-file-input_student"} {...file} />
+				<CustomTable className={"student__table"} {...table} />
+			</div>
+		</section>
 	);
 }

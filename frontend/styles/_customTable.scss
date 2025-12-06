@@ -5,6 +5,12 @@
     border-radius: 10px; 
     box-shadow: 0px 6px 18px rgba(12, 15, 20, 0.06);
 
+    &__caption {
+        @extend %TITLE;
+        text-align: left;
+        margin: 0 0 20px;
+    }
+
     &__head {
         background: $WATHER;
         color: $BLUE;

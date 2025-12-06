@@ -1,3 +1,8 @@
+import classNames from "classnames"
+import { useRef, useState } from "react";
+import CustomButton from "./CustomButton";
+import {CSSTransition} from "react-transition-group"
+
 // Добавил управление значением
 export default function CustomInput({
 	id,
@@ -7,12 +12,62 @@ export default function CustomInput({
 	className,
 	value,
 	onChange,
+	options
 }) {
+	const listRef = useRef(null);
+	const [activeOption, setActiveOption] = useState(null);
+	const [isVisible, setIsVisible] = useState(false);
+
+	const onOptionSelect = (e, option) => {
+		e.preventDefault();
+        setActiveOption(option);
+        setIsVisible(false);
+    }
+
+	const onMouseOver = () => {
+        setIsVisible(true);
+    }
+    const onMouseOut = () => {
+        setIsVisible(false);
+    }
+	console.log('visible', isVisible);
 	return (
-		<input
-			className={`custom-input ${className}`}
-			onChange={e => onChange?.(e.target.value)}
-			{...{ id, type, label, placeholder, value }}
-		/>
+		<div className={classNames("custom-input__container", className)} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+			{label &&
+				<label htmlFor={id} className="custom-input__label">{label}</label>
+			}
+			{options ? 
+				<CustomButton className="custom-input__value" text={activeOption || placeholder}/>
+				:
+				<input
+					className={`custom-input custom-input_${type}`}
+					onChange={e => onChange?.(e.target.value)}
+					{...{ id, type, label, placeholder, value }}
+				/>
+			}
+
+			{options &&
+				<CSSTransition 
+					in={isVisible} 
+					nodeRef={listRef}
+					timeout={500} 
+					classNames="custom-input__list"
+					unmountOnExit
+				>
+					<ul className="custom-input__list" ref={listRef}>
+						{options?.map((option, i) =>
+							<li key={i} className="custom-input__option">
+								<CustomButton 
+									className="custom-input__option-btn" 
+									onClick={(e) => onOptionSelect(e, option?.value)}
+									text={option?.value} 
+								/>
+							</li>
+						)}
+					</ul>
+				</CSSTransition>
+			}
+		</div>
+		
 	);
 }

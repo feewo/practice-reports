@@ -1,3 +1,9 @@
+%TITLE {
+    font-size: 24px;
+    font-weight: 700;
+    color: $BLUE;
+}
+
 @mixin wrapper() {
     max-width: 1230px; 
     width: 100%;

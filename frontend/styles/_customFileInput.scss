@@ -1,0 +1,29 @@
+.custom-file-input {
+    width: 100%;
+    padding: 40px 20px 20px;
+    border-radius: 10px;
+    background: $WHITE;
+    box-shadow: 0px 0 8px rgba(0, 0, 0, .1);
+    grid-column: span 2;
+
+    &__file {
+        grid-column: span 2;
+    }
+
+    &__title {
+        @extend %TITLE;
+        margin: 0 0 19px;
+    }
+
+    &__form {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 15px;
+        align-items: center;
+        max-width: 400px;
+    }
+
+    &__practice {
+        grid-column: span 3;
+    }
+}

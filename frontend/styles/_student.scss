@@ -1,0 +1,7 @@
+.student {
+    @extend .teacher;
+
+    &__block {
+        @extend .teacher__block;
+    }
+}

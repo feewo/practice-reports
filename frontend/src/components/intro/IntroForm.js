@@ -30,9 +30,6 @@ export default function IntroForm({ inputs, button, onSubmit, error }) {
 		<form className="intro__form">
 			{inputs.map((item, i) => (
 				<div key={i} className="intro__form-item">
-					<label className="intro__label" htmlFor={item.id}>
-						{item.label}
-					</label>
 					<CustomInput
 						{...item}
 						value={formValues[item.id]}

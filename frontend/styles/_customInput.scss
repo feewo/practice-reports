@@ -18,4 +18,64 @@
         background: rgba($RED, 0.1);
         color: $RED;
     }
+
+    &_file {
+        border: none;
+        padding: 0;
+        border-radius: 0;
+        cursor: pointer;
+    }
+
+    &__container {
+        position: relative;
+
+        &:hover {
+            .custom-filter__value {
+                background: rgba($BLUE, .1);
+                border: 2px solid $BLUE;
+                color: $BLUE;
+            }
+        }
+
+    }
+
+    &__label {
+        display: block;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0 0 5px;
+    }
+
+    &__list {
+        @extend .custom-filter__list;
+        z-index: 10;
+
+        &-enter {
+            max-height: 0;
+            opacity: 0;
+        }
+        &-enter-active {
+            max-height: 500px;
+            opacity: 1;
+            transition: opacity .3s ease-in-out, max-height .5s ease-in-out;
+        }
+        &-exit {
+            max-height: 500px;
+            opacity: 1;
+        }
+        &-exit-active {
+            max-height: 0;
+            opacity: 0;
+            transition: opacity .3s ease-in-out, max-height .5s ease-in-out;
+        }
+    }
+
+    &__option-btn {
+        @extend .custom-filter__option-btn;
+    }
+
+    &__value {
+        text-align: left;
+        @extend .custom-filter__value;
+    }
 }

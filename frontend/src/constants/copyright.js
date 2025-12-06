@@ -123,7 +123,71 @@ export const tacherContent = {
 }
 
 export const studentContent = {
-
+    table: {
+        title: "История практик",
+        head: [
+            {title: "Название практики"},
+            {title: "Руководитель"},
+            {title: "Файл"},
+            {title: "Статус"},
+            {title: "Оценка"},
+            {title: "Комментарий"},
+            {title: "Дата (сдача / дедлайн)"},
+        ],
+        body: [ // Временно
+            {
+                id: 1,
+                practice: "Учебная практика",
+                director: "Сидоров С.С.",
+                file: "test.png",
+                statusId: 1,
+                assessment: "Зачтено",
+                comment: "Работа выполнена хорошо",
+                date: "23.11.2024 / 24.11.2024",
+            },
+            {
+                id: 2,
+                practice: "Учебная практика",
+                director: "Кузнецов Д.Д.",
+                 file: "test.png",
+                statusId: 2,
+                assessment: "Не зачтено",
+                comment: "Исправить оформление",
+                date: "23.11.2025 / 24.11.2025",
+            }
+        ]
+    },
+    file: {
+        title: "Загрузка отчета",
+        form: {
+            inputs: [
+                 {
+                    className: "custom-file-input__practice",
+                    type: "text",
+                    label: "Название практики",
+                    name: "practice",
+                    placeholder: "Выберите тип практики",
+                    id: "practice",
+                    options: [
+                        {id: 0, value: "Учебная практика"},
+                        {id: 1, value: "Производственная технологическая практика"},
+                        {id: 2, value: "Производственная преддипломная практика"},
+                        {id: 3, value: "Научно-исследовательская практика"},
+                    ]
+                },
+                {
+                    className: "custom-file-input__file",
+                    type: "file",
+                    name: "file",
+                    id: "file"
+                }
+            ],
+            button: {
+                className: "custom-button_download",
+                text: "Загрузить"
+            }
+        }
+    }
 }
 
 export const assessmentModalContent = {
