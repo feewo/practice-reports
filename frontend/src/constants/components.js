@@ -1,5 +1,5 @@
 import IntroWithAuth from "../components/intro/IntroWithAuth";
-import { tacherContent, studentContent } from "./copyright";
+import { tacherContent, studentContent, assessmentModalContent } from "./copyright";
 import TeacherWithData from '../components/teacher/TeacherWithData'
 import StudentWithData from '../components/student/StudentWithData'
 import CustomModal from "../components/base/CustomModal";
