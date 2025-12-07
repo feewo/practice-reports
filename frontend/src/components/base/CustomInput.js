@@ -20,9 +20,12 @@ export default function CustomInput({
 
 	const onOptionSelect = (e, option) => {
 		e.preventDefault();
-        setActiveOption(option);
-        setIsVisible(false);
+    setActiveOption(option);
+    setIsVisible(false);
+		if (onChange) {
+      onChange(option); 
     }
+	}
 
 	const onMouseOver = () => {
         setIsVisible(true);
@@ -36,7 +39,13 @@ export default function CustomInput({
 		:
 		<input
 			className={`custom-input custom-input_${type}`}
-			onChange={e => onChange?.(e.target.value)}
+			onChange={(e) => {
+      			if (type === "file") {
+							onChange?.(e.target.files[0]);
+						} else {
+							onChange?.(e.target.value);
+						}
+					}}
 			{...{ id, type, label, placeholder, value }}
 		/>
 	)
