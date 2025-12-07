@@ -6,9 +6,18 @@ export const STATUSES = {
 }
 
 export const INTERNSHIP_IDS = {
-    "Учебная практика": 1,
-    "Производственная технологическая практика": 2,
+    "Производственная технологическая практика": 1,
+    "Учебная практика": 2,
     "Производственная преддипломная практика": 3
+};
+
+export const GRADE_TYPE_IDS = {
+    "Зачтено": 1,
+    "Не зачтено": 6,
+    "Неуд.": 5,
+    "Удовлетворительно": 4,
+    "Хорошо": 3,
+    "Отлично": 2
 };
 
 export const headerContent = {
@@ -209,10 +218,11 @@ export const assessmentModalContent = {
             placeholder: "— Выберите оценку —",
             options: [
                 {id: 1, value: "Зачтено"},
-                {id: 2, value: "Не зачтено"},
-                {id: 3, value: "Неуд."},
-                {id: 4, value: "Хорошо"},
-                {id: 5, value: "Отлично"},
+                {id: 6, value: "Не зачтено"},
+                {id: 5, value: "Неуд."},
+                {id: 4, value: "Удовлетворительно"},
+                {id: 3, value: "Хорошо"},
+                {id: 2, value: "Отлично"},
             ]
         },
         {
@@ -225,10 +235,12 @@ export const assessmentModalContent = {
     ],
     buttons: [
         {
+            action: "close",
             text: "Отмена",
             className: "custom-button_gray"
         },
         {
+            action: "submit",
             text: "Сохранить оценку",
             className: "custom-button_orange"
         }

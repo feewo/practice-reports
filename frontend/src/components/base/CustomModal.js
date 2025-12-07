@@ -38,7 +38,10 @@ export default function CustomModal({title, params, inputs, buttons, setModal}) 
 
                 <div className="custom-modal__footer">
                     {buttons.map((button, i) =>
-                        <CustomButton key={i} {...button} onClick={onCloseModal} />
+                        {
+                            const handleClick = button.onClick || onCloseModal;
+                            return <CustomButton key={i} {...button} onClick={handleClick} />;
+                        }
                     )}
                 </div>
             </form>

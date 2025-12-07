@@ -1,4 +1,3 @@
-// src/App.js
 import { useState, useEffect, useRef } from "react";
 import "../src/style.css";
 import { components, modals } from "./constants/components";
@@ -12,6 +11,7 @@ import { CSSTransition } from "react-transition-group";
 function App() {
 	const [page, setPage] = useState("checking");
 	const [modal, setModal] = useState("");
+	const [modalData, setModalData] = useState(null);
 	const modalRef = useRef(null);
 
 	const pagesWithHeader = ["teacher", "student"];
@@ -54,7 +54,7 @@ function App() {
 			<div className="App">
 				<div className="page">
 					{pagesWithHeader.includes(page) && <CustomHeader {...headerContent} />}
-					{components[page] ? components[page]({ setPage, setModal }) : null}
+					{components[page] ? components[page]({ setPage, setModal, setModalData }) : null}
 					<CSSTransition
 						in={modal}
 						unmountOnExit
@@ -63,7 +63,7 @@ function App() {
 						classNames="custom-modal__animation"
 					>
 						<div className="custom-modal__animation" ref={modalRef}>
-							{modals[modal] ? modals[modal]({ setModal }) : null}
+							{modals[modal] ? modals[modal]({ setModal, modalData }) : null}
 						</div>
 					</CSSTransition>
 				</div>

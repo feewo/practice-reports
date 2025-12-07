@@ -6,7 +6,7 @@ export default function CustomFilter({filter}) {
     const [activeOption, setActiveOption] = useState(filter?.activeOption);
     const [isVisibleList, setIsVisibleList] = useState(false);
     const listRef = useRef(null);
-    console.log(isVisibleList);
+
     const onOptionSelect = (option) => {
         filter.onChange?.(option);
         setActiveOption(option);

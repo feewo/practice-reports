@@ -20,8 +20,9 @@ const STATUS_IDS = {
 	notCompleted: 4,
 };
 
-export default function TeacherWithData({ filters, table, setModal }) {
+export default function TeacherWithData({ filters, table, setModal, setModalData }) {
 	const [filterValues, setFilterValues] = useState({});
+	const [allReportsData, setAllReportsData] = useState([]);
 	const [allReports, setAllReports] = useState([]);
 	const [filteredTableBody, setFilteredTableBody] = useState([]);
 
@@ -97,12 +98,13 @@ export default function TeacherWithData({ filters, table, setModal }) {
 				name: report.student_fio,
 				group: report.group,
 				file: report.file_url,
-				statusId: report.grade ? STATUS_IDS.valued : STATUS_IDS.notCompleted,
+				statusId: report.grade ? STATUS_IDS.valued : STATUS_IDS.invalued,
 				assessment: report.grade ?? null,
 				date: formatDates(report.submitted_date.split(" ")[0], report.deadline),
 			}));
-
+			
 			setAllReports(rows);
+			setAllReportsData(data.reports);
 			setFilteredTableBody(
 				applyClientFilters(rows, filterValuesToApply.status)
 			);
@@ -142,6 +144,18 @@ export default function TeacherWithData({ filters, table, setModal }) {
 		downloadFile(fileUrl, filename);
 	};
 
+	const openAssessmentModal = (reportId) => {
+		const report = allReportsData.find(r => r.report_id === reportId);
+
+		setModalData({
+			reportId,
+			studentName: report.student_fio,
+			reportTitle: "Отчёт " + report.internship_title.toLowerCase(),
+			onAssessmentSuccess: () => loadServerData(filterValues),
+		});
+		setModal("assessmentModal");
+	};
+
 	const tableData = {
 		head: table.head,
 		body: filteredTableBody,
@@ -153,6 +167,7 @@ export default function TeacherWithData({ filters, table, setModal }) {
 			table={tableData}
 			onDownload={handleDownload}
 			setModal={setModal}
+			onOpenModal={openAssessmentModal}
 		/>
 	);
 }

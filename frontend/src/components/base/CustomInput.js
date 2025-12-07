@@ -35,7 +35,7 @@ export default function CustomInput({
     }
 
 	const field = (type === "textarea" ?
-		<textarea className="custom-input custom-input_textarea" {...{ id, type, label, placeholder, value }} />
+		<textarea className="custom-input custom-input_textarea" onChange={(e) => onChange?.(e.target.value)} {...{ id, type, label, placeholder, value }} />
 		:
 		<input
 			className={`custom-input custom-input_${type}`}
