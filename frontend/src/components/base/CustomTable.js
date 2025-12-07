@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { STATUSES } from "../../constants/copyright";
 import CustomButton from "./CustomButton";
 
-export default function CustomTable({head, body, title, className, onDownload}) {
+export default function CustomTable({head, body, title, className, onDownload, onClickName}) {
     const getTextByStatusId = (statusId) => {
         return STATUSES[Object.keys(STATUSES).find(key => STATUSES[key].id === statusId)].text
     }
@@ -39,7 +39,7 @@ export default function CustomTable({head, body, title, className, onDownload}) 
                             key !== "id" ?
                             <td key={key} className={classNames(`custom-table__body-${key}`, {
                                 [`custom-table__body-cell_${key === "statusId" && getColorByStatusId(value)}`]: key === "statusId"
-                            })}>
+                            })} onClick={key === "name" && !!onClickName && onClickName}>
                                 {value ? getContentByCell(key, value, row) : "—"}
                             </td> : null
                         )}

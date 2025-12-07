@@ -1,15 +1,18 @@
 // src/App.js
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "../src/style.css";
-import { components } from "./constants/components";
+import { components, modals } from "./constants/components";
 import { apiFetch } from "./api";
 import { getToken } from "./utils/auth";
 import { AuthProvider } from "./context/AuthContext";
 import CustomHeader from "./components/base/CustomHeader";
 import { headerContent } from "./constants/copyright";
+import { CSSTransition } from "react-transition-group";
 
 function App() {
 	const [page, setPage] = useState("checking");
+	const [modal, setModal] = useState("");
+	const modalRef = useRef(null);
 
 	const pagesWithHeader = ["teacher", "student"];
 
@@ -51,7 +54,18 @@ function App() {
 			<div className="App">
 				<div className="page">
 					{pagesWithHeader.includes(page) && <CustomHeader {...headerContent} />}
-					{components[page] ? components[page]({ setPage }) : null}
+					{components[page] ? components[page]({ setPage, setModal }) : null}
+					<CSSTransition
+						in={modal}
+						unmountOnExit
+						timeout={300}
+						nodeRef={modalRef}
+						classNames="custom-modal__animation"
+					>
+						<div className="custom-modal__animation" ref={modalRef}>
+							{modals[modal] ? modals[modal]({ setModal }) : null}
+						</div>
+					</CSSTransition>
 				</div>
 			</div>
 		</AuthProvider>

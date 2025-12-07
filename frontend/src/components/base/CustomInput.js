@@ -30,20 +30,26 @@ export default function CustomInput({
     const onMouseOut = () => {
         setIsVisible(false);
     }
-	console.log('visible', isVisible);
+
+	const field = (type === "textarea" ?
+		<textarea className="custom-input custom-input_textarea" {...{ id, type, label, placeholder, value }} />
+		:
+		<input
+			className={`custom-input custom-input_${type}`}
+			onChange={e => onChange?.(e.target.value)}
+			{...{ id, type, label, placeholder, value }}
+		/>
+	)
+	
 	return (
 		<div className={classNames("custom-input__container", className)} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
 			{label &&
-				<label htmlFor={id} className="custom-input__label">{label}</label>
+				<label htmlFor={id} className="custom-input__label" dangerouslySetInnerHTML={{ __html: label }}></label>
 			}
 			{options ? 
 				<CustomButton className="custom-input__value" text={activeOption || placeholder}/>
 				:
-				<input
-					className={`custom-input custom-input_${type}`}
-					onChange={e => onChange?.(e.target.value)}
-					{...{ id, type, label, placeholder, value }}
-				/>
+				field
 			}
 
 			{options &&

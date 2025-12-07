@@ -40,6 +40,15 @@
         }
     }
 
+    &__body-name {
+        cursor: pointer;
+        text-decoration: underline;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
     &__body-cell {
         &_green {
             color: $STATUS-GREEN;

@@ -191,5 +191,41 @@ export const studentContent = {
 }
 
 export const assessmentModalContent = {
-    
+    title: "Оценивание работы",
+    params: [
+        { title: "Студент:", value: "Иванов Иван Иванович" },
+        { title: "Работа:", value: "Финальный отчет по Практике №1" },
+    ],
+    inputs: [
+        {
+            label: "Оценка",
+            name: "assessment",
+            id: "assessment",
+            placeholder: "— Выберите оценку —",
+            options: [
+                {id: 1, value: "Зачтено"},
+                {id: 2, value: "Не зачтено"},
+                {id: 3, value: "Неуд."},
+                {id: 4, value: "Хорошо"},
+                {id: 5, value: "Отлично"},
+            ]
+        },
+        {
+            type: "textarea",
+            label: "Комментарий к работе <span>(Обязателен при «Не зачтено»)</span>",
+            placeholder: "Введите ваш отзыв, рекомендации по доработке или комментарий к оценке",
+            id: "comment",
+            name: "comment"
+        }
+    ],
+    buttons: [
+        {
+            text: "Отмена",
+            className: "custom-button_gray"
+        },
+        {
+            text: "Сохранить оценку",
+            className: "custom-button_orange"
+        }
+    ]
 }

@@ -20,7 +20,7 @@ const STATUS_IDS = {
 	notCompleted: 4,
 };
 
-export default function TeacherWithData({ filters, table }) {
+export default function TeacherWithData({ filters, table, setModal }) {
 	const [filterValues, setFilterValues] = useState({});
 	const [allReports, setAllReports] = useState([]);
 	const [filteredTableBody, setFilteredTableBody] = useState([]);
@@ -152,6 +152,7 @@ export default function TeacherWithData({ filters, table }) {
 			filters={filtersWithHandlers}
 			table={tableData}
 			onDownload={handleDownload}
+			setModal={setModal}
 		/>
 	);
 }
