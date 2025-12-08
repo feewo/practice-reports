@@ -131,6 +131,11 @@ use Illuminate\Http\Request;
  *     @OA\Property(property="error", type="string", example="Доступно только для студентов"),
  *     @OA\Property(property="message", type="string", example="The provided credentials are incorrect.")
  * )
+ * 
+ * @OA\Tag(
+ *     name="Groups",
+ *     description="Управление учебными группами"
+ * )
  */
 class SwaggerController extends Controller
 {

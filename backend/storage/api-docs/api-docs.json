@@ -159,6 +159,47 @@
                 ]
             }
         },
+        "/api/groups": {
+            "get": {
+                "tags": [
+                    "Groups"
+                ],
+                "summary": "Get a list of groups",
+                "description": "Returns a list of all study groups with the ability to filter by course",
+                "operationId": "f286cbf34dc4be32a94459a335658168",
+                "parameters": [
+                    {
+                        "name": "course",
+                        "in": "query",
+                        "description": "Filter by course number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 6,
+                            "minimum": 1,
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The list of groups was successfully received.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GroupsListResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/reports/upload": {
             "post": {
                 "tags": [
@@ -390,6 +431,34 @@
     },
     "components": {
         "schemas": {
+            "Group": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "ПИ-101"
+                    },
+                    "course": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "GroupsListResponse": {
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Group"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "LoginRequest": {
                 "required": [
                     "login",
@@ -623,6 +692,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Groups",
+            "description": "Управление учебными группами"
+        },
         {
             "name": "Authentication",
             "description": "Аутентификация и управление токенами"

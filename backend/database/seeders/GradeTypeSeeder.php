@@ -16,6 +16,7 @@ class GradeTypeSeeder extends Seeder
             ['type' => '3', 'created_at' => now(), 'updated_at' => now()],
             ['type' => '2', 'created_at' => now(), 'updated_at' => now()],
             ['type' => 'незачет', 'created_at' => now(), 'updated_at' => now()],
+            ['type' => 'на доработке', 'created_at' => now(), 'updated_at' => now()],
         ];
 
         GradeType::insert($gradeTypes);
