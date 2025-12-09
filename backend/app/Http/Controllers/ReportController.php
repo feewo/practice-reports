@@ -91,7 +91,7 @@ class ReportController extends Controller
             
             $existingReport->update([
                 'file_name' => $file->getClientOriginalName(),
-                'file_path' => '/storage/' . $filePath
+                'file_path' => $filePath
             ]);
             
             return response()->json([
