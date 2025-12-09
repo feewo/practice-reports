@@ -25,6 +25,7 @@ export default function TeacherWithData({ filters, table, setModal, setModalData
 	const [allReportsData, setAllReportsData] = useState([]);
 	const [allReports, setAllReports] = useState([]);
 	const [filteredTableBody, setFilteredTableBody] = useState([]);
+	const [dynamicFilters, setDynamicFilters] = useState(filters);
 
 	const getServerFilterIds = values => {
 		const ids = {};
@@ -78,7 +79,6 @@ export default function TeacherWithData({ filters, table, setModal, setModalData
 
 	const loadServerData = async (filterValuesToApply = {}) => {
 		try {
-			const token = getToken();
 			const serverFilters = getServerFilterIds(filterValuesToApply);
 
 			const params = new URLSearchParams();
@@ -91,7 +91,7 @@ export default function TeacherWithData({ filters, table, setModal, setModalData
 				? `/teacher/students-reports?${queryString}`
 				: `/teacher/students-reports`;
 
-			const data = await apiFetch(url, {}, token);
+			const data = await apiFetch(url, {});
 
 			const rows = data.reports.map(report => ({
 				id: report.report_id,
@@ -108,6 +108,35 @@ export default function TeacherWithData({ filters, table, setModal, setModalData
 			setFilteredTableBody(
 				applyClientFilters(rows, filterValuesToApply.status)
 			);
+
+    const groupsResponse = await apiFetch("/groups", {});
+    const groups = groupsResponse.data || [];
+
+    const groupOptions = [
+      { id: 0, value: "Все" },
+      ...groups.map(group => ({ id: group.id, value: group.name }))
+    ];
+
+    const uniqueCourses = [...new Set(groups.map(group => group.course))];
+    const courseOptions = [
+      { id: 0, value: "Все" },
+      ...uniqueCourses
+        .sort((a, b) => a - b)
+        .map(course => ({ id: course, value: String(course) }))
+    ];
+
+    const updatedFilters = dynamicFilters.map(filter => {
+      if (filter.id === "group_id") {
+        return { ...filter, options: groupOptions };
+      }
+      if (filter.id === "course") {
+        return { ...filter, options: courseOptions };
+      }
+      return filter;
+    });
+
+      setDynamicFilters(updatedFilters);
+			
 		} catch (err) {
 			console.error("Ошибка загрузки данных:", err);
 			setAllReports([]);
@@ -133,11 +162,11 @@ export default function TeacherWithData({ filters, table, setModal, setModalData
 		loadServerData();
 	}, []);
 
-	const filtersWithHandlers = filters.map(filter => ({
-		...filter,
-		value: filterValues[filter.id] || "Все",
-		onChange: value => handleFilterChange(filter.id, value),
-	}));
+	const filtersWithHandlers = dynamicFilters.map(filter => ({
+    ...filter,
+    value: filterValues[filter.id] || "Все",
+    onChange: value => handleFilterChange(filter.id, value),
+  }));
 
 	const handleDownload = (fileUrl, studentName) => {
 		const filename = `${studentName}_отчёт.pdf`;
