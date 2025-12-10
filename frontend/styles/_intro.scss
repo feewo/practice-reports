@@ -23,11 +23,20 @@
     }
 
     &__title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        grid-gap: 15px;
         font-size: 32px;
         text-transform: uppercase;
         font-weight: 700;
         color: $BLUE;
         margin: 0 0 5px;
+    }
+
+    &__logo {
+        width: 30px;
+        height: 30px;
     }
 
     &__subtitle {
