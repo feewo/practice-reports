@@ -9,18 +9,15 @@ services:
     volumes:
       - ./backend:/var/www
       - storage_volume:/var/www/storage/app/public
-    depends_on:
-      postgres:
-        condition: service_healthy
     environment:
       - APP_ENV=local
       - APP_DEBUG=true
       - DB_CONNECTION=pgsql
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_DATABASE=laravel
-      - DB_USERNAME=laravel
-      - DB_PASSWORD=password
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
       - SESSION_DRIVER=cookie
     ports:
       - "8000:8000"
@@ -36,32 +33,11 @@ services:
         # Создаем необходимые директории
         mkdir -p /var/www/storage/app/public/uploads &&
         
-        php artisan migrate --force &&
-        php artisan cache:clear &&
         php artisan view:clear &&
         php artisan route:clear &&
-        php artisan db:seed --force &&
         php artisan config:cache &&
         php artisan serve --host=0.0.0.0 --port=8000
       "
 
-  postgres:
-    image: postgres:15
-    container_name: postgres_db
-    environment:
-      POSTGRES_DB: laravel
-      POSTGRES_USER: laravel
-      POSTGRES_PASSWORD: password
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U laravel -d laravel"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
-
 volumes:
-  postgres_data:
   storage_volume:
