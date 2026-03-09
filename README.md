@@ -1,5 +1,5 @@
 # Запуск 🚀
-Бэк:
+Бэк: создаем файл .env (пример в env.example) и заполняем данными удаленной базы данных. Далее:
 ```bash
 docker-compose -f docker-compose.backend.yml up --build
 ```
