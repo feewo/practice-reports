@@ -19,6 +19,8 @@ Route::get('/groups', [GroupController::class, 'index']);
 Route::middleware(['auth:sanctum', 'ability:teacher'])->group(function () {
     Route::get('/teacher/students-reports', [TeacherController::class, 'getStudentsReports']);
     Route::post('/grades/set', [GradeController::class, 'setGrade']);
+    Route::put('/grades/{id}', [GradeController::class, 'updateGrade']);
+    Route::delete('/grades/{id}', [GradeController::class, 'deleteGrade']);
     
     // Дополнительные маршруты для учителей
     Route::get('/teacher/dashboard', [TeacherController::class, 'getDashboard']);
